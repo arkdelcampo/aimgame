@@ -91,6 +91,7 @@ function start() {
     startBtn.style.marginTop = "0px"
     startBtn.style.marginBottom = "0px"
     document.getElementById("btn").style.visibility = "visible"
+    document.getElementById("titleText").style.visibility = "hidden"
     startTimer()
     updPos()
 }
