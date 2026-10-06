@@ -4,6 +4,7 @@ h1, h2 {
     font-size: 50;
     color: white;
     margin-top: 20;
+    z-index:auto;
 }
 
 button {
@@ -24,7 +25,9 @@ button {
 
 #startBtn {
     font-size: 20;
-    margin-bottom: -300;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     font-weight: bold;
     visibility: visible;
 }
@@ -38,13 +41,16 @@ button {
     margin-bottom: 20;
 }
 
-div {
-    border: 5px dotted black;
-    height: 720;
-    width: 1440;
+#gameFrame {
+    border: 5px solid black;
+    height: 90%;
+    width: 90%;
     margin: auto;
-    background-color: rgb(128, 128, 128);
-    position: relative;
+    /* background-color: rgb(128, 128, 128); */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #bg {
