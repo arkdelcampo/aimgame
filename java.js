@@ -61,6 +61,10 @@ function updPos() {
     }
 }
 
+function createTarget() {
+    
+}
+
 function startTimer() {
     if (gameActive == false) {
         gameActive = true
@@ -81,6 +85,7 @@ function startTimer() {
 }
 
 function start() {
+    console.log("STARTED")
     let startBtn = document.getElementById("startBtn")
     startBtn.style.visibility = "hidden"
     startBtn.style.marginTop = "0px"
