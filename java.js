@@ -2,17 +2,21 @@ let score = 0
 let time = 30
 let lives = 3
 
-let gameActive = false
+let gameState = "titleScreen"
 
 document.addEventListener("click", (event) => {
-    if (gameActive == true) {
-        let element = event.target;
+    let element = event.target;
+    if (gameState == "ingame") {
         if (element.id == "gameFrame") {
             console.log("MISS")
             updLives()
-            flash(document.body, "rgb(136, 71, 71)", "rgb(73, 73, 73)")
+            flash(document.body, "rgba(255, 194, 194, 0.42)", "rgb(255, 255, 255)")
         } else if (element.id == "btn") {
             console.log("HIT")
+        }
+    } else if (gameState == "titleScreen") {
+        if (element.id == "gameFrame") {
+            start()
         }
     }
 });
@@ -28,13 +32,13 @@ function flash(element, flashColor, ogColor) {
 }
 
 function endGame() {
-    gameActive = false
-    document.getElementById("timerText").textContent = "GAME OVER"
+    gameState = "gameOver"
+    // document.getElementById("timerText").textContent = "GAME OVER"
     console.log("GG")
 }
 
 function updLives() {
-    if (gameActive == true) {
+    if (gameState == "ingame") {
         lives--
         document.getElementById("livesText").textContent = "Lives: " + lives
         if (lives <= 0) {
@@ -49,13 +53,13 @@ function updScore() {
 }
 
 function updPos() {
-    if (gameActive == true) {
+    if (gameState == "ingame") {
         let btn = document.getElementById("btn")
         let gameFrame = document.getElementById("gameFrame")
-        let xPos = Math.floor(Math.random() * (gameFrame.clientWidth - 100))
-        let yPos = Math.floor(Math.random() * (gameFrame.clientHeight - 200))
-        btn.style.marginLeft = xPos
-        btn.style.marginTop = yPos
+        let xPos = Math.floor(Math.random() * 100)
+        let yPos = Math.floor(Math.random() * 100)
+        btn.style.left = xPos + "%"
+        btn.style.top = yPos + "%"
         updScore()
         flash(btn, "rgb(146, 228, 161)", "rgb(255, 255, 255)")
     }
@@ -65,33 +69,31 @@ function createTarget() {
     
 }
 
-function startTimer() {
-    if (gameActive == false) {
-        gameActive = true
-        let duration = time
-        document.getElementById("timerText").textContent = "Timer: " + duration
-        let timerThread = setInterval(() => {
-            document.getElementById("timerText").textContent = "Timer: " + duration
-            if (duration > 0 && gameActive == true) {
-                 duration -= 1
-                document.getElementById("timerText").textContent = "Timer: " + duration
-                console.log(duration)
-            } else if (duration <= 0 || lives <= 0) {
-                endGame()
-                clearInterval(timerThread)
-            }
-         }, 1000);
-    }
-}
+// function startTimer() {
+//     if (gameActive == false) {
+//         gameActive = true
+//         let duration = time
+//         document.getElementById("timerText").textContent = "Timer: " + duration
+//         let timerThread = setInterval(() => {
+//             document.getElementById("timerText").textContent = "Timer: " + duration
+//             if (duration > 0 && gameActive == true) {
+//                  duration -= 1
+//                 document.getElementById("timerText").textContent = "Timer: " + duration
+//                 console.log(duration)
+//             } else if (duration <= 0 || lives <= 0) {
+//                 endGame()
+//                 clearInterval(timerThread)
+//             }
+//          }, 1000);
+//     }
+// }
 
 function start() {
     console.log("STARTED")
-    let startBtn = document.getElementById("startBtn")
-    startBtn.style.visibility = "hidden"
-    startBtn.style.marginTop = "0px"
-    startBtn.style.marginBottom = "0px"
+    document.getElementById("startText").style.visibility = "hidden"
     document.getElementById("btn").style.visibility = "visible"
     document.getElementById("titleText").style.visibility = "hidden"
-    startTimer()
+    // startTimer()
+    gameState = "ingame"
     updPos()
 }
