@@ -1,6 +1,9 @@
 let score = 0
-let time = 30
+let level = 1
 let lives = 3
+
+let targetsHit = 0
+let requiredHits = level * 30
 
 let gameState = "titleScreen"
 
@@ -49,7 +52,8 @@ function updLives() {
 
 function updScore() {
     score += 1
-    document.getElementById("scoreText").textContent = "Score: " + score
+    targetsHit++
+    document.getElementById("scoreText").textContent = targetsHit + " / " + requiredHits
 }
 
 function updPos() {
@@ -93,6 +97,8 @@ function start() {
     document.getElementById("startText").style.visibility = "hidden"
     document.getElementById("btn").style.visibility = "visible"
     document.getElementById("titleText").style.visibility = "hidden"
+    document.getElementById("levelText").innerHTML = "LEVEL " + level
+    document.getElementById("livesText").innerHTML = "LIVES: " + lives
     // startTimer()
     gameState = "ingame"
     updPos()
