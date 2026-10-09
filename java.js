@@ -60,10 +60,11 @@ function updPos() {
     if (gameState == "ingame") {
         let btn = document.getElementById("btn")
         let gameFrame = document.getElementById("gameFrame")
-        let xPos = Math.floor(Math.random() * 100)
-        let yPos = Math.floor(Math.random() * 100)
+        let xPos = Math.floor(Math.random() * 90) + 5
+        let yPos = Math.floor(Math.random() * 90) + 5
         btn.style.left = xPos + "%"
         btn.style.top = yPos + "%"
+        console.log(btn.style.left, btn.style.top)
         updScore()
         flash(btn, "rgb(146, 228, 161)", "rgb(255, 255, 255)")
     }
